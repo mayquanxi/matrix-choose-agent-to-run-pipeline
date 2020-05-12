@@ -4,6 +4,7 @@ pipeline {
     }
     agent none
     stages {
+    	stage('BuildandTest') {
     	matrix {
     		agent {
     			label '${PLATFORM}'
@@ -46,6 +47,7 @@ pipeline {
                     }
                 }
             }
+    	}
     	}
     }
 }
