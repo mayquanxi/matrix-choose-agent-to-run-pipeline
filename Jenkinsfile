@@ -7,7 +7,7 @@ pipeline {
     	stage('BuildandTest') {
     	matrix {
     		agent {
-    			label '${PLATFORM}'
+    			label "${PLATFORM}"
     		}
     		when { anyOf {
                 expression { params.PLATFORM_FILTER == 'all' }
