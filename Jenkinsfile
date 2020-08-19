@@ -20,7 +20,7 @@ pipeline {
                 }
                 axis {
                     name 'APPS'
-                    values 'nodejs'
+                    values 'node13'
                 }
             }
             stages {
