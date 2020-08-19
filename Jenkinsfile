@@ -27,7 +27,7 @@ pipeline {
                 stage('Build') {
                     steps {
                         echo "Do Build for ${PLATFORM} - ${APPS}"
-                        sh 'node --vesrion'
+                        sh 'node --version'
                         sh 'ls -l'
 
                         }
@@ -35,7 +35,7 @@ pipeline {
                 stage('Test') {
                     steps {
                         echo "Do Test for ${PLATFORM} - ${APPS}"
-                        sh 'yarn --vesrion'
+                        sh 'yarn --version'
                         sh 'ls -l'
                     }
                 }
