@@ -1,26 +1,26 @@
 pipeline {
     parameters {
-        choice(name: 'PLATFORM_FILTER', choices: ['master', 'akali'], description: 'Run on specific platform')
+        choice(name: 'PLATFORM_FILTER', choices: ['all', 'master', 'akali', 'ubuntu18-digitalocean'], description: 'Run on specific platform')
     }
     agent none
     stages {
-    	stage('Build_Stage and Test_Stage') {
+    	stage('BuildandTest') {
     	matrix {
     		agent {
     			label "${PLATFORM}"
     		}
     		when { anyOf {
-                expression { params.PLATFORM_FILTER == 'master' }
+                expression { params.PLATFORM_FILTER == 'all' }
                 expression { params.PLATFORM_FILTER == env.PLATFORM }
             } }
             axes {
                 axis {
                     name 'PLATFORM'
-                    values 'master', 'akali'
+                    values 'master', 'akali', 'ubuntu18-digitalocean'
                 }
                 axis {
-                    name 'APPS'
-                    values 'nodejs', 'maven'
+                    name 'BROWSER'
+                    values 'firefox', 'chrome', 'safari', 'edge'
                 }
             }
             excludes {
@@ -30,20 +30,20 @@ pipeline {
                         values 'akali'
                         }
                     axis {
-                        name 'APPS'
-                        values 'nodejs'
+                        name 'BROWSER'
+                        values 'safari'
                     }
                 }
             }
             stages {
                 stage('Build') {
                     steps {
-                        echo "Do Build for ${PLATFORM} - ${APPS}"
+                        echo "Do Build for ${PLATFORM} - ${BROWSER}"
                         }
                     }
                 stage('Test') {
                     steps {
-                        echo "Do Test for ${PLATFORM} - ${APPS}"
+                        echo "Do Test for ${PLATFORM} - ${BROWSER}"
                     }
                 }
             }
